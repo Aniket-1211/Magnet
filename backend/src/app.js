@@ -9,6 +9,11 @@ import { errorMiddleware } from "./middleware/error.middleware.js";
 export const app = express();
 
 const devOriginPattern = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+const allowedOrigins = new Set(
+  [env.CLIENT_ORIGIN, ...env.CLIENT_ORIGINS.split(",")]
+    .map((origin) => origin.trim())
+    .filter(Boolean)
+);
 
 app.use(
   cors({
@@ -18,7 +23,7 @@ app.use(
         return;
       }
 
-      if (origin === env.CLIENT_ORIGIN) {
+      if (allowedOrigins.has(origin)) {
         callback(null, true);
         return;
       }
