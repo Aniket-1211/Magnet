@@ -45,12 +45,12 @@ export async function signin(req, res) {
 
   const user = await User.findOne({ email: email.toLowerCase() }).select("+password");
   if (!user) {
-    return res.status(401).json({ success: false, message: "Invalid credentials" });
+    return res.status(401).json({ success: false, message: "User not found" });
   }
 
   const isPasswordValid = await user.comparePassword(password);
   if (!isPasswordValid) {
-    return res.status(401).json({ success: false, message: "Invalid credentials" });
+    return res.status(401).json({ success: false, message: "Incorrect password" });
   }
 
   const token = signAccessToken({ sub: user._id.toString(), role: user.role });

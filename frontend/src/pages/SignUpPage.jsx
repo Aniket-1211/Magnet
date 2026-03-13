@@ -28,12 +28,18 @@ function SignUpPage() {
     event.preventDefault();
 
     try {
+      if (form.password.trim().length < 8) {
+        toast.error("Password must be at least 8 characters");
+        return;
+      }
       const response = await dispatch(signupUser(form)).unwrap();
       toast.success(response.message || "Signup successful");
       setForm(initialSignup);
       navigate("/");
     } catch (error) {
-      toast.error(error.message || "Signup failed");
+      const message =
+        typeof error === "string" ? error : error?.message || "Signup failed";
+      toast.error(message);
     }
   };
 

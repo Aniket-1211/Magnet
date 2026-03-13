@@ -30,7 +30,9 @@ function SignInPage() {
       setForm(initialSignin);
       navigate("/");
     } catch (error) {
-      toast.error(error.message || "Signin failed");
+      const message =
+        typeof error === "string" ? error : error?.message || "Signin failed";
+      toast.error(message);
     }
   };
 

@@ -14,13 +14,13 @@ function ProductFilters({
   const selectedSet = selectedCategories instanceof Set ? selectedCategories : new Set(selectedCategories);
 
   return (
-    <section className="rounded-3xl border-r-4 border-white/90 p-6">
+    <section className="rounded-3xl border-r-4 border-[#F4F0E4] p-6">
       <div className="flex flex-wrap items-center justify-center gap-4">
         <h2 className="w-full text-center text-xl font-extrabold text-slate-900">Filter Products</h2>
       </div>
 
-      <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,260px)_1fr]">
-        <div className="rounded-2xl border border-slate-200/70 bg-white p-4 shadow-sm">
+      <div className="mt-6 grid gap-6 rounded-2xl bg-[#F4F0E4] p-4 lg:grid-cols-[minmax(0,260px)_1fr]">
+        <div className="rounded-2xl bg-[#F4F0E4] p-4 shadow-sm">
           <h3 className="text-sm font-bold uppercase tracking-wide text-slate-500">Price Range</h3>
           <div className="mt-4 space-y-3">
             <label className="block text-sm font-semibold text-slate-700" htmlFor="min-price">

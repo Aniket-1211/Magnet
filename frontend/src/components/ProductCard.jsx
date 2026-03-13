@@ -8,6 +8,9 @@ function ProductCard({
   variant = "default",
   children
 }) {
+  const fallbackImageURL = `https://picsum.photos/seed/${encodeURIComponent(
+    product?._id || product?.name || "magnet"
+  )}/900/900`;
   const handleAction = () => {
     if (onAction) {
       onAction(product);
@@ -34,6 +37,11 @@ function ProductCard({
         <img
           src={product.imageURL}
           alt={product.name}
+          onError={(event) => {
+            if (event.currentTarget.src !== fallbackImageURL) {
+              event.currentTarget.src = fallbackImageURL;
+            }
+          }}
           className={`${isCompact ? "h-full w-full" : "h-52 w-full"} object-cover transition-transform duration-500 group-hover:scale-105`}
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-900/25 via-transparent to-transparent" />

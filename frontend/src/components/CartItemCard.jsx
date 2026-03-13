@@ -1,6 +1,9 @@
 function CartItemCard({ item, onUpdateQuantity, onRemove }) {
   const product = item.product || {};
   const productId = product._id;
+  const fallbackImageURL = `https://picsum.photos/seed/${encodeURIComponent(
+    productId || product.name || "magnet"
+  )}/200/200`;
 
   return (
     <article className="flex flex-col gap-4 rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
@@ -8,6 +11,11 @@ function CartItemCard({ item, onUpdateQuantity, onRemove }) {
         <img
           src={product.imageURL}
           alt={product.name}
+          onError={(event) => {
+            if (event.currentTarget.src !== fallbackImageURL) {
+              event.currentTarget.src = fallbackImageURL;
+            }
+          }}
           className="h-20 w-20 rounded-xl object-cover"
         />
         <div>
